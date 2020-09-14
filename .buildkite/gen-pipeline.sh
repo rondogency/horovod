@@ -206,7 +206,7 @@ run_mpi() {
   local oneccl_env=${3:-}
 
   run_mpi_pytest ${test} ${queue} ${oneccl_env}
-  run_mpi_integration ${test} ${queue} ${oneccl_env}
+  #run_mpi_integration ${test} ${queue} ${oneccl_env}
 }
 
 run_gloo_pytest() {
@@ -302,7 +302,7 @@ run_gloo() {
   local queue=$2
 
   run_gloo_pytest ${test} ${queue}
-  run_gloo_integration ${test} ${queue}
+  #run_gloo_integration ${test} ${queue}
 }
 
 run_spark_integration() {
@@ -422,10 +422,10 @@ for test in ${tests[@]-}; do
     fi
 
     # always run spark tests which use MPI and Gloo
-    run_spark_integration ${test} "cpu"
+    #run_spark_integration ${test} "cpu"
 
     # no runner application, world size = 1
-    run_single_integration ${test} "cpu" ${oneccl_env}
+    #run_single_integration ${test} "cpu" ${oneccl_env}
   fi
 done
 
@@ -444,25 +444,5 @@ for test in ${tests[@]-}; do
     if [[ ${test} == *mpi* ]]; then
       run_mpi_pytest ${test} "4x-gpu-g4"
     fi
-  fi
-done
-
-# wait for all gpu unit tests to finish
-echo "- wait"
-
-# run 2x gpu integration tests
-for test in ${tests[@]-}; do
-  if [[ ${test} == *-gpu-* ]] || [[ ${test} == *-mixed-* ]]; then
-    # if gloo is specified, run gloo gpu integration tests
-    if [[ ${test} == *-gloo* ]]; then
-      run_gloo_integration ${test} "2x-gpu-g4"
-    fi
-
-    # if mpi is specified, run mpi gpu integration tests
-    if [[ ${test} == *mpi* ]]; then
-      run_mpi_integration ${test} "2x-gpu-g4"
-    fi
-
-    run_spark_integration ${test} "2x-gpu-g4"
   fi
 done

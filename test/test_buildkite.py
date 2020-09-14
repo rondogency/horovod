@@ -105,7 +105,6 @@ class BuildKiteTests(unittest.TestCase):
                              "  agents:\n"
                              "    queue: cpu\n"
                              "- wait\n"
-                             "- wait\n"
                              "- wait\n", actual_pipeline)
 
     def do_test_gen_full_pipeline(self, cmd, env=dict()):
