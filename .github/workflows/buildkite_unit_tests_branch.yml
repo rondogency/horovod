@@ -31,7 +31,7 @@ jobs:
       continue-on-error: true
 
     - name: Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@master
+      uses: EnricoMi/publish-unit-test-result-action@branch-publish-annotations
       with:
         check_name: Unit Test Results
         github_token: ${{ secrets.GITHUB_TOKEN }}
