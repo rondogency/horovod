@@ -22,7 +22,7 @@ jobs:
 
     steps:
     - name: Download Buildkite Artifacts
-      uses: EnricoMi/download-buildkite-artifact-action@master
+      uses: EnricoMi/download-buildkite-artifact-action@branch-get-names-of-retried-jobs
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         buildkite_token: ${{ secrets.BUILDKITE_TOKEN }}
