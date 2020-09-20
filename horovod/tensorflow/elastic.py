@@ -208,3 +208,10 @@ class TensorFlowState(ObjectState):
 
     def _assign_var(self, var, value):
         var.assign(value)
+
+
+__all__ = [
+    'TensorFlowKerasState',
+    'TensorFlowState',
+    'run',
+]
